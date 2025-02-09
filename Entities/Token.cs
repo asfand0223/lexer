@@ -7,6 +7,10 @@ namespace MyLexer.Entities
         INT,
         INT_LITERAL,
         EQUALS,
+        LPAREN,
+        RPAREN,
+        LBRACE,
+        RBRACE,
         SEMICOLON,
     }
 

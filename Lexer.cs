@@ -1,58 +1,56 @@
 using System.Text;
-using MyLexer.Entities;
 
 namespace MyLexer
 {
     public class Lexer
     {
-        private readonly StreamReader _streamReader;
-        private readonly StringBuilder _buffer;
-        private readonly List<Token> _tokens;
-        private readonly Tokenizer _tokenizer;
+        private readonly string _code;
+        private int _position;
+        public List<string> _lexemes { get; }
 
-        public Lexer(string fileName)
+        public Lexer(string code)
         {
-            _streamReader = new StreamReader(fileName);
-            _buffer = new StringBuilder();
-            _tokens = new List<Token>();
-            _tokenizer = new Tokenizer();
+            _code = code;
+            _position = 0;
+            _lexemes = new List<string>();
+        }
+
+        public bool IsValidIdentifierChar(char c)
+        {
+            return (c >= 'a' && c <= 'z')
+                || (c >= 'A' && c <= 'Z')
+                || (c >= '0' && c <= '9')
+                || c == '_';
+        }
+
+        public void ReadWord()
+        {
+            StringBuilder sb = new StringBuilder();
+            while (IsValidIdentifierChar(_code[_position]))
+            {
+                sb.Append(_code[_position++]);
+            }
+            _lexemes.Add(sb.ToString());
         }
 
         public void Lex()
         {
-            while (_streamReader.Peek() != -1)
+            while (_position < _code.Length)
             {
-                char c = (char)_streamReader.Peek();
-                switch (c)
+                if (char.IsWhiteSpace(_code[_position]))
                 {
-                    case char _ when char.IsWhiteSpace(c):
-                        if (_buffer.Length > 0)
-                        {
-                            _tokens.Add(_tokenizer.Tokenize(_buffer.ToString()));
-                            _buffer.Clear();
-                        }
-                        break;
-                    case char _ when !char.IsLetterOrDigit(c) && c != '_':
-                        if (_buffer.Length > 0)
-                        {
-                            _tokens.Add(_tokenizer.Tokenize(_buffer.ToString()));
-                            _buffer.Clear();
-                        }
-                        _tokens.Add(_tokenizer.Tokenize(c.ToString()));
-                        break;
-                    default:
-                        _buffer.Append(c);
-                        break;
+                    _position++;
+                    continue;
                 }
-                _streamReader.Read();
-            }
-        }
-
-        public void DisplayTokens()
-        {
-            foreach (Token token in _tokens)
-            {
-                Console.WriteLine(token.GetTokenType() + " => " + token.GetValue());
+                else if (IsValidIdentifierChar(_code[_position]))
+                {
+                    ReadWord();
+                }
+                else
+                {
+                    _lexemes.Add(_code[_position].ToString());
+                    _position++;
+                }
             }
         }
     }
