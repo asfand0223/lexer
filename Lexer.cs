@@ -15,18 +15,15 @@ namespace MyLexer
             _lexemes = new List<string>();
         }
 
-        public bool IsValidIdentifierChar(char c)
+        public bool IsIdentifierChar(char c)
         {
-            return (c >= 'a' && c <= 'z')
-                || (c >= 'A' && c <= 'Z')
-                || (c >= '0' && c <= '9')
-                || c == '_';
+            return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
         }
 
         public void ReadWord()
         {
             StringBuilder sb = new StringBuilder();
-            while (IsValidIdentifierChar(_code[_position]))
+            while (IsIdentifierChar(_code[_position]))
             {
                 sb.Append(_code[_position++]);
             }
@@ -42,7 +39,7 @@ namespace MyLexer
                     _position++;
                     continue;
                 }
-                else if (IsValidIdentifierChar(_code[_position]))
+                else if (IsIdentifierChar(_code[_position]))
                 {
                     ReadWord();
                 }
