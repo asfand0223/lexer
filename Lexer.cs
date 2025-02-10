@@ -28,7 +28,7 @@ namespace MyLexer
             return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
         }
 
-        public void ReadWord()
+        public void ReadIdentifier()
         {
             StringBuilder sb = new StringBuilder();
             while (IsIdentifierChar(_code[_position]))
@@ -49,7 +49,7 @@ namespace MyLexer
                 }
                 else if (IsIdentifierStartChar(_code[_position]))
                 {
-                    ReadWord();
+                    ReadIdentifier();
                 }
                 else
                 {
