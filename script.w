@@ -1,2 +1,2 @@
-int _my_1st_var_ = ({1});
+int 1_my_1st_var_ = ({1});
 
