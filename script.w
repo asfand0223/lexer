@@ -1,2 +1,3 @@
-int 1_my_1st_var_ = ({1});
+int _my_1st_int_ = ({1});
+string _my_1st_string_ = "string";
 

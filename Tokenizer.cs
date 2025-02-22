@@ -46,6 +46,13 @@ namespace MyLexer
                 case string s when !ContainsIllegalCharacters(s):
                     return new Token(TokenType.IDENTIFIER, lexeme);
                 default:
+                    if (lexeme.Length > 1 && lexeme[0] == '"' && lexeme[lexeme.Length - 1] == '"')
+                    {
+                        return new Token(
+                            TokenType.STRING_LITERAL,
+                            lexeme.Substring(1, lexeme.Length - 2)
+                        );
+                    }
                     return new Token(TokenType.ILLEGAL, lexeme);
             }
         }

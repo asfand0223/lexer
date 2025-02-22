@@ -31,7 +31,32 @@ namespace MyLexer
         public void ReadIdentifier()
         {
             StringBuilder sb = new StringBuilder();
-            while (IsIdentifierChar(_code[_position]))
+            while (_position < _code.Length && IsIdentifierChar(_code[_position]))
+            {
+                sb.Append(_code[_position++]);
+            }
+            _lexemes.Add(sb.ToString());
+        }
+
+        public bool IsStringLiteralStartChar(char c)
+        {
+            return c == '"';
+        }
+
+        public bool IsStringLiteralEndChar(char c)
+        {
+            return c == '"';
+        }
+
+        public void ReadStringLiteral()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(_code[_position++]);
+            while (_position < _code.Length && !IsStringLiteralEndChar(_code[_position]))
+            {
+                sb.Append(_code[_position++]);
+            }
+            if (_position < _code.Length)
             {
                 sb.Append(_code[_position++]);
             }
@@ -50,6 +75,10 @@ namespace MyLexer
                 else if (IsIdentifierStartChar(_code[_position]))
                 {
                     ReadIdentifier();
+                }
+                else if (IsStringLiteralStartChar(_code[_position]))
+                {
+                    ReadStringLiteral();
                 }
                 else
                 {

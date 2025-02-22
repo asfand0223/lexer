@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/aali/lexer/Lexer.csproj",
+      "projectUniqueName": "/home/aali/coding_projects/personal/lexer/Lexer.csproj",
       "projectName": "Lexer",
-      "projectPath": "/home/aali/lexer/Lexer.csproj",
+      "projectPath": "/home/aali/coding_projects/personal/lexer/Lexer.csproj",
       "packagesPath": "/home/aali/.nuget/packages/",
-      "outputPath": "/home/aali/lexer/obj/",
+      "outputPath": "/home/aali/coding_projects/personal/lexer/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/aali/.nuget/NuGet/NuGet.Config"

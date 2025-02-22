@@ -6,6 +6,7 @@ namespace MyLexer.Entities
         IDENTIFIER,
         INT,
         INT_LITERAL,
+        STRING_LITERAL,
         EQUALS,
         LPAREN,
         RPAREN,
