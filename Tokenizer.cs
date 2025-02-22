@@ -54,11 +54,33 @@ namespace MyLexer
                 case ";":
                     return new Token(TokenType.SEMICOLON, lexeme);
                 case "=":
+                    return new Token(TokenType.ASSIGN, lexeme);
+                case "+":
+                    return new Token(TokenType.ADD, lexeme);
+                case "-":
+                    return new Token(TokenType.SUBTRACT, lexeme);
+                case "*":
+                    return new Token(TokenType.MULTIPLY, lexeme);
+                case "/":
+                    return new Token(TokenType.DIVIDE, lexeme);
+                case "++":
+                    return new Token(TokenType.INCREMENT, lexeme);
+                case "--":
+                    return new Token(TokenType.DECREMENT, lexeme);
+                case "==":
                     return new Token(TokenType.EQUALS, lexeme);
                 case "<":
                     return new Token(TokenType.LESS_THAN, lexeme);
                 case ">":
                     return new Token(TokenType.GREATER_THAN, lexeme);
+                case "<=":
+                    return new Token(TokenType.LESS_THAN_OR_EQUAL, lexeme);
+                case ">=":
+                    return new Token(TokenType.GREATER_THAN_OR_EQUAL, lexeme);
+                case "||":
+                    return new Token(TokenType.OR, lexeme);
+                case "&&":
+                    return new Token(TokenType.AND, lexeme);
                 case string _ when int.TryParse(lexeme, out _):
                     return new Token(TokenType.INT_LITERAL, lexeme);
                 case string s when !ContainsIllegalCharacters(s):

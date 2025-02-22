@@ -6,7 +6,18 @@ namespace MyLexer
     {
         private readonly string _code;
         private int _position;
-        public List<string> _lexemes { get; }
+        private HashSet<string> _multiCharOperators = new HashSet<string>
+        {
+            "==",
+            "<=",
+            ">=",
+            "!=",
+            "++",
+            "--",
+            "||",
+            "&&",
+        };
+        private List<string> _lexemes;
 
         public Lexer(string code)
         {
@@ -21,6 +32,11 @@ namespace MyLexer
                 || (c >= 'A' && c <= 'Z')
                 || (c >= '0' && c <= '9')
                 || c == '_';
+        }
+
+        public List<string> GetLexemes()
+        {
+            return _lexemes;
         }
 
         public bool IsIdentifierStartChar(char c)
@@ -63,6 +79,21 @@ namespace MyLexer
             _lexemes.Add(sb.ToString());
         }
 
+        public bool ReadMultiCharOperator()
+        {
+            if (_position + 1 > _code.Length)
+                return false;
+            string potentialMultiCharOperator =
+                _code[_position].ToString() + _code[_position + 1].ToString();
+            if (_multiCharOperators.Contains((potentialMultiCharOperator)))
+            {
+                _lexemes.Add(potentialMultiCharOperator);
+                _position += 2;
+                return true;
+            }
+            return false;
+        }
+
         public void Lex()
         {
             while (_position < _code.Length)
@@ -82,8 +113,11 @@ namespace MyLexer
                 }
                 else
                 {
-                    _lexemes.Add(_code[_position].ToString());
-                    _position++;
+                    if (!ReadMultiCharOperator())
+                    {
+                        _lexemes.Add(_code[_position].ToString());
+                        _position++;
+                    }
                 }
             }
         }

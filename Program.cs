@@ -7,7 +7,7 @@ try
     Lexer lexer = new Lexer(code);
     Tokenizer tokenizer = new Tokenizer();
     lexer.Lex();
-    tokenizer.Tokenize(lexer._lexemes);
+    tokenizer.Tokenize(lexer.GetLexemes());
     foreach (Token token in tokenizer._tokens)
     {
         Console.WriteLine(token.GetTokenType() + " => " + token.GetValue());
