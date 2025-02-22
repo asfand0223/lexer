@@ -29,10 +29,20 @@ namespace MyLexer
             {
                 case "int":
                     return new Token(TokenType.INT, lexeme);
-                case "=":
-                    return new Token(TokenType.EQUALS, lexeme);
-                case ";":
-                    return new Token(TokenType.SEMICOLON, lexeme);
+                case "string":
+                    return new Token(TokenType.STRING, lexeme);
+                case "true":
+                    return new Token(TokenType.BOOLEAN, lexeme);
+                case "false":
+                    return new Token(TokenType.BOOLEAN, lexeme);
+                case "if":
+                    return new Token(TokenType.IF, lexeme);
+                case "else":
+                    return new Token(TokenType.ELSE, lexeme);
+                case "for":
+                    return new Token(TokenType.FOR, lexeme);
+                case "while":
+                    return new Token(TokenType.WHILE, lexeme);
                 case "(":
                     return new Token(TokenType.LPAREN, lexeme);
                 case ")":
@@ -41,6 +51,14 @@ namespace MyLexer
                     return new Token(TokenType.LBRACE, lexeme);
                 case "}":
                     return new Token(TokenType.RBRACE, lexeme);
+                case ";":
+                    return new Token(TokenType.SEMICOLON, lexeme);
+                case "=":
+                    return new Token(TokenType.EQUALS, lexeme);
+                case "<":
+                    return new Token(TokenType.LESS_THAN, lexeme);
+                case ">":
+                    return new Token(TokenType.GREATER_THAN, lexeme);
                 case string _ when int.TryParse(lexeme, out _):
                     return new Token(TokenType.INT_LITERAL, lexeme);
                 case string s when !ContainsIllegalCharacters(s):

@@ -5,6 +5,8 @@ namespace MyLexer.Entities
         ILLEGAL,
         IDENTIFIER,
         INT,
+        STRING,
+        BOOLEAN,
         INT_LITERAL,
         STRING_LITERAL,
         EQUALS,
@@ -13,6 +15,12 @@ namespace MyLexer.Entities
         LBRACE,
         RBRACE,
         SEMICOLON,
+        IF,
+        ELSE,
+        WHILE,
+        FOR,
+        LESS_THAN,
+        GREATER_THAN,
     }
 
     public class Token
